@@ -1,0 +1,7 @@
+python 
+pandas
+sklearn
+numpy
+flask
+pickle
+difflib
