@@ -1,0 +1,299 @@
+
+<div id="chatbotWrapper">
+  <style>
+    #chatbotWrapper * {
+      box-sizing: border-box;
+    }
+
+    #chatContainer {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      width: 500px;
+      background: rgb(90, 196, 198);
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+    }
+
+    #chatContainer h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    #chatbox {
+      height: 200px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      padding: 5px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      background-image: url('{{ url_for("static", filename="chatbot-bg.jpg") }}');
+      font-size: 14px;
+    }
+
+    #chatContainer input[type="text"] {
+      width: calc(100% - 60px);
+      padding: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    #chatContainer button {
+      padding: 5px 10px;
+      margin-top: 5px;
+      margin-left: 5px;
+      border: none;
+      background: rgb(247, 8, 8);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .chatbot-icon-container {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      border-radius: 20px;
+    }
+  </style>
+
+  <!-- Chatbot Icon -->
+  <div class="chatbot-icon-container">
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
+      alt="Robot Icon"
+      width="50"
+      height="50"
+      onclick="toggleChatbot()"
+      style="cursor: pointer;"
+    />
+  </div>
+
+  <!-- Chat Container -->
+  <div id="chatContainer" style="display: none;">
+    <h3>Medicine Chatbot</h3>
+    <div id="chatbox"></div>
+    <input type="text" id="userInput" placeholder="Enter your symptoms..." />
+    <button onclick="sendMessage()">Send</button>
+    <button onclick="startVoiceRecognition()">🎙️ Speak</button>
+  </div>
+
+  <script>
+    const input = document.getElementById("userInput");
+    const chatbox = document.getElementById("chatbox");
+    const chatContainer = document.getElementById("chatContainer");
+
+    function toggleChatbot() {
+      chatContainer.style.display = chatContainer.style.display === "none" ? "block" : "none";
+    }
+
+    input.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        sendMessage();
+      }
+    });
+
+   const recommendations = {
+      "fever": ["Paracetamol", "Ibuprofen", "Stay hydrated"],
+      "headache": ["Aspirin", "Ibuprofen", "Rest in a dark room"],
+      "cold": ["Antihistamines", "Decongestants", "Drink warm fluids"],
+      "cough": ["Cough syrup", "Honey tea", "Stay hydrated"],
+      "stomach pain": ["Antacids", "Buscopan", "BRAT diet (Banana, Rice, Applesauce, Toast)"],
+      "body ache": ["Ibuprofen", "Pain relief balm", "Warm compress"],
+      "sore throat": ["Lozenges", "Salt water gargle", "Warm teas"],
+      "itching": ["Antihistamine cream", "Calamine lotion", "Avoid scratching"],
+      "back pain": ["Muscle relaxants", "Physical therapy", "Heat therapy"],
+      "dizziness": ["Hydration", "Rest", "Monitor symptoms"],
+      "nausea": ["Antiemetic", "Ginger tea", "Light meals"],
+      "vomiting": ["Oral rehydration", "Antiemetic", "Rest"],
+      "diarrhea": ["ORS", "Probiotics", "BRAT diet"],
+      "constipation": ["Fiber supplements", "Laxatives", "Hydration"],
+      "allergies": ["Antihistamines", "Nasal spray", "Avoid allergens"],
+      "rash": ["Topical cream", "Antihistamines", "Keep area clean"],
+      "joint pain": ["NSAIDs", "Physical therapy", "Rest"],
+      "muscle pain": ["Ibuprofen", "Massage", "Warm compress"],
+      "earache": ["Pain reliever", "Warm compress", "Consult doctor"],
+      "toothache": ["Ibuprofen", "Clove oil", "Dental visit"],
+      "sinusitis": ["Decongestants", "Nasal saline", "Steam inhalation"],
+      "bronchitis": ["Cough suppressant", "Expectorant", "Rest"],
+      "asthma": ["Inhalers", "Bronchodilators", "Avoid triggers"],
+      "anxiety": ["Therapy", "Anti-anxiety medication", "Relaxation techniques"],
+      "depression": ["Antidepressants", "Counseling", "Lifestyle changes"],
+      "insomnia": ["Melatonin", "Sleep hygiene", "Relaxation techniques"],
+      "hypertension": ["ACE inhibitors", "Beta blockers", "Lifestyle modifications"],
+      "diabetes": ["Insulin", "Metformin", "Dietary changes"],
+      "acne": ["Topical benzoyl peroxide", "Salicylic acid", "Consult dermatologist"],
+      "eczema": ["Moisturizers", "Topical steroids", "Avoid irritants"],
+      "psoriasis": ["Topical treatments", "Phototherapy", "Systemic medications"],
+      "migraine": ["Triptans", "NSAIDs", "Rest in dark room"],
+      "vertigo": ["Meclizine", "Balance therapy", "Hydration"],
+      "chest pain": ["Nitroglycerin", "Aspirin", "Emergency care"],
+      "palpitations": ["Beta blockers", "Lifestyle changes", "Stress management"],
+      "heartburn": ["Antacids", "H2 blockers", "Avoid trigger foods"],
+      "indigestion": ["Antacids", "Digestive enzymes", "Eat slowly"],
+      "gastritis": ["Antacids", "Proton pump inhibitors", "Avoid spicy foods"],
+      "ulcers": ["Antibiotics", "Proton pump inhibitors", "Avoid NSAIDs"],
+      "anemia": ["Iron supplements", "Vitamin B12", "Dietary changes"],
+      "hypothyroidism": ["Thyroid hormone replacement", "Regular monitoring", "Consult endocrinologist"],
+      "hyperthyroidism": ["Beta blockers", "Antithyroid medications", "Radioactive iodine"],
+      "arthritis": ["NSAIDs", "Physical therapy", "Weight management"],
+      "sprain": ["Rest", "Ice", "Compression and elevation"],
+      "strain": ["Rest", "Ice", "Gentle stretching"],
+      "conjunctivitis": ["Antibiotic eye drops", "Cold compress", "Maintain hygiene"],
+      "eye irritation": ["Artificial tears", "Rest", "Cool compress"],
+      "blurred vision": ["Corrective lenses", "Rest", "Eye exam"],
+      "ear infection": ["Antibiotics", "Pain relievers", "Warm compress"],
+      "fibromyalgia": ["Pain relievers", "Exercise", "Stress management"],
+      "leg cramps": ["Hydration", "Magnesium supplements", "Stretching exercises"],
+      "swollen ankles": ["Elevation", "Compression stockings", "Reduce salt intake"],
+      "edema": ["Diuretics", "Reduce salt intake", "Monitor fluid levels"],
+      "urinary tract infection": ["Antibiotics", "Increased water intake", "Pain relievers"],
+      "kidney stones": ["Pain relievers", "Hydration", "Medical evaluation"],
+      "bladder infection": ["Antibiotics", "Increased water intake", "Urinary alkalizers"],
+      "prostate issues": ["Alpha blockers", "5-alpha-reductase inhibitors", "Consult urologist"],
+      "menstrual cramps": ["NSAIDs", "Heat therapy", "Rest"],
+      "irregular periods": ["Hormonal therapy", "Dietary changes", "Consult gynecologist"],
+      "hot flashes": ["Hormone therapy", "Lifestyle changes", "Cooling techniques"],
+      "osteoporosis": ["Calcium supplements", "Vitamin D", "Bisphosphonates"],
+      "dandruff": ["Anti-dandruff shampoo", "Scalp massage", "Tea tree oil"],
+      "hair loss": ["Minoxidil", "Nutritional supplements", "Consult dermatologist"],
+      "nail fungus": ["Antifungal creams", "Oral antifungals", "Keep nails dry"],
+      "skin infection": ["Antibiotic ointment", "Oral antibiotics", "Keep area clean"],
+      "boils": ["Warm compress", "Topical antibiotics", "Maintain hygiene"],
+      "cellulitis": ["Oral antibiotics", "Elevation", "Rest"],
+      "wound care": ["Clean the wound", "Antibiotic ointment", "Cover with bandage"],
+      "sunburn": ["Aloe vera", "Cool compress", "Moisturizers"],
+      "poison ivy": ["Topical steroids", "Oatmeal baths", "Avoid scratching"],
+      "insect bites": ["Antihistamines", "Topical cream", "Cold compress"],
+      "stye": ["Warm compress", "Antibiotic ointment", "Maintain eye hygiene"],
+      "hemorrhoids": ["Topical creams", "Fiber supplements", "Sitz baths"],
+      "varicose veins": ["Compression stockings", "Exercise", "Elevation"],
+      "peripheral neuropathy": ["Pain relievers", "Physical therapy", "Vitamin supplements"],
+      "tingling": ["Check vitamin levels", "Rest", "Consult doctor"],
+      "numbness": ["Medical evaluation", "Physical therapy", "Nutritional support"],
+      "panic attack": ["Breathing techniques", "Reassurance", "Consult professional"],
+      "phobia": ["Exposure therapy", "Counseling", "Relaxation techniques"],
+      "PTSD": ["Therapy", "Medication", "Support groups"],
+      "obesity": ["Dietary changes", "Exercise", "Behavioral therapy"],
+      "weight loss": ["Balanced diet", "Regular exercise", "Lifestyle modifications"],
+      "scoliosis": ["Physical therapy", "Bracing", "Surgical consultation"],
+      "kyphosis": ["Physical therapy", "Pain management", "Posture correction"],
+      "lactose intolerance": ["Lactase supplements", "Dairy alternatives", "Dietary adjustments"],
+      "gluten intolerance": ["Gluten-free diet", "Nutritional counseling", "Avoid cross-contamination"],
+      "irritable bowel syndrome": ["Dietary fiber", "Probiotics", "Stress management"],
+      "acid reflux": ["Antacids", "H2 blockers", "Avoid trigger foods"],
+      "GERD": ["Proton pump inhibitors", "Lifestyle changes", "Dietary modifications"],
+      "cholecystitis": ["Antibiotics", "Pain management", "Surgical consultation"],
+      "hepatitis": ["Antiviral medication", "Rest", "Regular monitoring"],
+      "cirrhosis": ["Avoid alcohol", "Nutritional support", "Liver transplant evaluation"],
+      "pancreatitis": ["Hospitalization", "IV fluids", "Pain management"],
+      "gout": ["NSAIDs", "Colchicine", "Lifestyle modifications"],
+      "narcolepsy": ["Stimulants", "Scheduled naps", "Sleep hygiene"],
+      "snoring": ["Lifestyle changes", "CPAP machine", "Consult sleep specialist"],
+      "sleep apnea": ["CPAP machine", "Weight loss", "Sleep study"],
+      "skin rash": ["Topical steroids", "Antihistamines", "Avoid irritants"],
+      "inflammation": ["NSAIDs", "Cold compress", "Rest"],
+      "joint stiffness": [
+        "Warm-up exercises", 
+        "Physical therapy", 
+        "Pain relievers"
+      ]
+    };
+
+
+    function appendMessage(sender, message) {
+      const messageElement = document.createElement("div");
+      messageElement.textContent = `${sender}: ${message}`;
+      chatbox.appendChild(messageElement);
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    function sendMessage() {
+      const userInput = input.value.trim().toLowerCase();
+      if (userInput === "") return;
+
+      appendMessage("You", input.value);
+      input.value = "";
+
+      let response = "I'm sorry, I don't have information on that. Can you try describing your symptoms again?";
+      const greetings = [
+"hi", "hii", "hiii", "hiiii", "hello", "hey", "good morning", "good evening", 
+"morning", "evening", "hey there", "hiya", "howdy", "greetings", "sup", "what's up", 
+"hola", "bonjour", "salut", "ciao", "aloha", "saludos", "namaste", "salam", "ola", 
+"konbanwa", "bonjourno", "shalom", "holla", "whats up", "yo", "g'day", "how's it going", 
+"howdy-doo", "what's good", "hiya", "yo yo", "heya", "yo there", "wassup", "hi there", 
+"good day", "guten tag", "morning sunshine", "top of the morning", "yoho", "good afternoon", 
+"ahoy", "greetings earthling", "salve", "bon dia", "konnichiwa", "hello there"
+];
+
+
+      if (greetings.includes(userInput)) {
+        response = "Hello! How can I assist you today?";
+      } else if (userInput.includes("how are you")) {
+        response = "I'm here and ready to help! How can I assist you today?";
+      } else {
+        let matched = false;
+        for (const symptom in recommendations) {
+          if (userInput.includes(symptom)) {
+            response = `For ${symptom}, I recommend: ${recommendations[symptom].join(", ")}.`;
+            matched = true;
+            break;
+          }
+        }
+        if (!matched) {
+          response = "Sorry, I couldn't recognize your symptoms. Could you please describe them again?";
+        }
+      }
+      function speakText(text) {
+      const speech = new SpeechSynthesisUtterance(text);
+      speech.lang = "en-US";
+      window.speechSynthesis.speak(speech);
+    }
+
+      setTimeout(() => {
+        appendMessage("Bot", response);
+        speakText(response); // ✅ Voice output here
+      }, 500);
+    }
+
+    function startVoiceRecognition() {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = "en-US";
+      recognition.start();
+
+      recognition.onresult = function (event) {
+        const transcript = event.results[0][0].transcript.toLowerCase();
+        input.value = transcript;
+        sendMessage();
+      };
+
+    }
+
+    // Close chat if clicking outside the container or icon
+    document.addEventListener("click", function (event) {
+      const isChatOpen = chatContainer.style.display === "block";
+      const isClickInsideChat = chatContainer.contains(event.target);
+      const isClickOnIcon = document.querySelector(".chatbot-icon-container").contains(event.target);
+
+      if (isChatOpen && !isClickInsideChat && !isClickOnIcon) {
+        chatContainer.style.display = "none";
+      }
+    });
+
+  </script>
+</div>
+
+
+
+
