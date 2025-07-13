@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us | Digital Health Center</title>
+  <meta name="description"
+    content="Discover our mission, vision, team, and core values at Medical Health Center. AI-powered digital healthcare for all." />
+
+  <!-- CSS Libraries -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    :root {
+      --primary: #00bcd4;
+      --primary-light-color: #91f3fc;
+      --accent: #ff0099;
+      --secondary-light-color-x:  #00b3ff;
+      --secondary-light-color-y:  #f439e1fe;
+      --gradient: linear-gradient(135deg, #00eaff, #1e012e, #ff0099);
+      --bg: #f0f9ff;
+      --card-bg: #fff;
+      --text-dark: #333;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-dark);
+      scroll-behavior: smooth;
+      padding-top: 50px;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Hero/Intro */
+    section.intro {
+      /* background: url('static/bg3.jpg') center/cover no-repeat; */
+      color: #fff;
+      height: 50vh;
+      display: flex;
+      align-items: start;
+      justify-content: center;
+      position: relative;
+
+      clip-path: ellipse(100% 90% at 50% 0%);
+    }
+
+    section.intro::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .background-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .intro .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .intro h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+    }
+
+    .highlight {
+      background: linear-gradient(135deg, #00eaff, #000306, #ff0099);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .predict-btn {
+      background: linear-gradient(135deg, #007cf0, #00dfd8);
+      color: rgb(241, 11, 11);
+      padding: 0.3rem 2.2rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      box-shadow: 0 8px 20px rgba(0, 223, 216, 0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .predict-btn i {
+      font-size: 1.2rem;
+    }
+
+    .predict-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(3, 58, 56, 0.4);
+      background: linear-gradient(135deg, #00dfd8, #007cf0);
+    }
+
+    .result-container {
+      background: rgba(5, 46, 56, 0.5);
+      color: white;
+      border-radius: 15px;
+      padding: 40px;
+    }
+
+    /* Modal Content */
+    .modal-content {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Modal Header */
+    .modal-header {
+      background: linear-gradient(to right, #020d21, #073f50, #638a8f);
+      color: #fff;
+      font-weight: bold;
+      border-bottom: none;
+    }
+
+    .modal-title {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* Close Button */
+    .btn-close {
+      filter: invert(1);
+      /* white close icon on dark header */
+    }
+
+    /* Modal Body Style */
+    .modal-body {
+      background: linear-gradient(135deg, #096c6c 0%, #ffffff 100%);
+      color: #222;
+      font-family: 'Arial', sans-serif;
+      font-size: 1.15rem;
+      padding: 25px 20px;
+      border-radius: 0;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* Modal Animation */
+    .modal.fade .modal-dialog {
+      transform: translateY(-40px);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    .modal.fade.show .modal-dialog {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 576px) {
+      .modal-title {
+        font-size: 1.2rem;
+      }
+
+      .modal-body {
+        font-size: 1rem;
+        padding: 15px;
+      }
+    }
+
+
+    section {
+      padding: 8px 16px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: "";
+      width: 60px;
+      height: 4px;
+      background: var(--gradient);
+      display: block;
+      margin: 10px auto 0;
+    }
+
+    .section-wrapper {
+      padding: 16px;
+      box-sizing: border-box;
+    }
+
+    @media (min-width: 768px) {
+      .section-wrapper {
+        padding: 30px 32px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .section-wrapper {
+        padding: 40px 64px;
+      }
+    }
+
+    .service-grid {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      padding: 8px 0;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .service-grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .service-card {
+      display: block;
+      /* Important for <a> styling */
+      flex: 0 0 calc(12.5% - 8px);
+      min-width: 100px;
+      background: var(--primary-light-color);
+      padding: 6px 6px;
+      border-radius: 12px;
+      scroll-snap-align: start;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .service-card i {
+      font-size: 20px;
+      color: var(--secondary-light-color-y);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .service-card h4 {
+      font-size: .78rem;
+      margin: 3px 0 2px;
+      white-space: nowrap;
+    }
+
+    .service-card p {
+      font-size: 0.65rem;
+      color: #555;
+      white-space: nowrap;
+      margin: 0;
+    }
+
+    .buy-btn.tiny {
+      padding: 4px 12px;
+      font-size: 0.55rem;
+      background-color: var(--secondary-light-color-x);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      line-height: 1;
+      margin-top: 6px;
+      transition: background-color 0.2s ease;
+      pointer-events: auto;
+      /* Ensure the button remains clickable inside <a> */
+    }
+
+    .buy-btn.tiny:hover {
+      background-color: #5100ffc7;
+    }
+
+    /* Responsive: 5 cards per row on mobile screens */
+    @media (max-width: 480px) {
+      .service-card {
+        flex: 0 0 calc(20% - 8px);
+        min-width: auto;
+        padding: 10px 6px;
+      }
+    }
+
+
+
+
+    .hero-banner-wrapper {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 16px;
+    }
+
+    .hero-banners {
+      display: flex;
+      transition: transform 0.5s ease;
+      will-change: transform;
+      white-space: nowrap;
+    }
+
+    .hero-banners a {
+      flex: 0 0 calc((100% - 20px) / 3);
+      margin-right: 10px;
+    }
+
+    .hero-banners a:last-child {
+      margin-right: 0;
+    }
+
+    .hero-banners img {
+      width: 100%;
+      height: 125px;
+      border-radius: 8px;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .hero-banners a {
+        flex: 0 0 85vw;
+        margin-right: 10px;
+      }
+    }
+
+    .banner-dots {
+      text-align: center;
+      margin-top: 2px;
+    }
+
+    .banner-dots .dot {
+      display: inline-block;
+      width: 7px;
+      height: 5px;
+      margin: 0 2px;
+      background: #ccc;
+      border-radius: 70px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .banner-dots .dot.active {
+      background: var(--primary, #00bfa6);
+    }
+
+
+
+
+    .health-condition-category {
+      padding: 12px 36px;
+    }
+
+    .condition-category-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      justify-items: center;
+    }
+
+    .cond-cat-item {
+      margin-top: 6px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      /* desktop: icon left, text right */
+      align-items: center;
+      gap: 16px;
+      padding: 16px 8px;
+      background: #ffffff;
+      border: none;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #333;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease-in-out;
+      text-align: center;
+    }
+
+    .cond-cat-item:hover {
+      background: #effeff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0, 191, 166, 0.08);
+    }
+
+    .cond-cat-item i,
+    .cond-cat-item img {
+      font-size: 30px;
+      color: #00bfa6;
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+    }
+
+    .cond-cat-item img {
+      object-fit: contain;
+    }
+
+    .cond-cat-item span {
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    /* Mobile layout: stack icon above text */
+    @media (max-width: 600px) {
+      .condition-category-grid {
+        grid-template-columns: repeat(5, 1fr);
+        /* Optional: 2 per row for better spacing */
+      }
+
+      .cond-cat-item {
+        flex-direction: column;
+        justify-content: center;
+        gap: 6px;
+        text-align: center;
+      }
+
+    }
+
+
+
+
+
+
+    .sbi-offer img {
+      width: 100%;
+      /* Full width of the container */
+      height: auto;
+      /* Maintain aspect ratio */
+      display: block;
+      /* Remove inline spacing */
+      border-radius: 8px;
+      /* Optional: smooth corners */
+      object-fit: cover;
+      /* Ensures good fit in case dimensions are fixed later */
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+      /* Optional visual depth */
+    }
+
+
+
+
+    .test-section {
+      padding: 20px 20px;
+      background-color: #f9fbff;
+      text-align: left;
+    }
+
+    .test-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .test-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      background: white;
+      padding: 10px;
+      width: 100%;
+      max-width: 120px;
+      /* Compact card width */
+      border-radius: 8px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+      color: inherit;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .test-box:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      background: #effeff;
+    }
+
+    .test-icon {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+
+    .test-box h4 {
+      font-size: 0.7rem;
+      margin: 4px 0 3px;
+      color: #222;
+    }
+
+    .test-price {
+      font-size: 0.65rem;
+      color: #555;
+      margin-bottom: 6px;
+    }
+
+    .test-box button {
+      background: var(--primary, #007bff);
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 0.65rem;
+      cursor: pointer;
+    }
+
+    
+.test-box button:hover {
+  background: #552fc8dc;
+}
+
+    @media (max-width: 768px) {
+      .test-box {
+        max-width: calc(20% - 8px);
+        /* 5 cards per row with spacing */
+        padding: 8px 6px;
+      }
+
+      .test-icon {
+        font-size: 1rem;
+      }
+
+      .test-box h4 {
+        font-size: 0.65rem;
+      }
+
+      .test-price {
+        font-size: 0.6rem;
+      }
+
+      .test-box button {
+        font-size: 0.6rem;
+        padding: 3px 6px;
+      }
+    }
+
+
+
+    .value-deals {
+      padding: 24px 16px;
+      background: #fff;
+    }
+
+    .deal-title {
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+      text-align: left;
+      color: #222;
+    }
+
+    .deal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
+      justify-content: center;
+    }
+
+
+
+    .deal-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background: #effeff;
+      padding: 6px 8px;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      transition: 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .deal-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .deal-card button {
+      pointer-events: auto;
+      /* disables individual button click to allow full-card click */
+    }
+
+
+    .deal-card img {
+      width: 48px;
+      /* smaller image */
+      height: 48px;
+      object-fit: contain;
+      margin-bottom: 4px;
+    }
+
+    .deal-name {
+      font-size: 0.6rem;
+      /* reduced font */
+      color: #333;
+      margin: 2px 0;
+      line-height: 1.1;
+    }
+
+    .deal-price {
+      font-size: 0.55rem;
+      font-weight: 600;
+      color: #007bff;
+      margin-bottom: 4px;
+    }
+
+    .buy-btn {
+      background-color: #00c3ff;
+      color: #fff;
+      border: none;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-size: 0.55rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .buy-btn:hover {
+      background-color: #007bff;
+    }
+
+
+    /* ✅ Force 5 cards per row on small devices */
+    @media (max-width: 768px) {
+      .deal-grid {
+        grid-template-columns: repeat(5, 1fr);
+        /* Exactly 5 per row */
+      }
+    }
+
+    .card-custom {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .card-custom:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .card-custom h4 {
+      color: #da0654;
+    }
+
+    .card-custom h5 {
+      color: #da0654;
+    }
+
+
+    .mission-img {
+      width: 80%;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease-out;
+    }
+
+    /* FAQ Accordion Style */
+    .faq-card {
+      background: var(--card-bg, #ffffff);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .faq-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .faq-card h5 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--primary, #00bcd4);
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-card p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #555;
+      margin: 0;
+    }
+
+    .cta-section {
+      background: var(--gradient);
+      color: #fff;
+      text-align: center;
+      padding: 4rem 1rem;
+      clip-path: ellipse(100% 80% at 50% 100%);
+    }
+
+    .cta-section a {
+      background: #fff;
+      color: #007b8f;
+      padding: .8rem 2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      transition: transform .3s;
+    }
+
+    .cta-section a:hover {
+      transform: scale(1.05);
+      background-color: #00eaff;
+      color: #000306;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+
+    /* Page-specific background */
+    .page1-container {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      min-height: 100vh;
+      padding-top: 60px;
+    }
+
+    .hero-section {
+      background-color: #007b8f;
+      padding: 60px 0;
+      position: relative;
+      color: rgb(211, 18, 134);
+      border-radius: 25px;
+    }
+
+    .hero-section::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: none;
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      color: black;
+    }
+
+    .feature-box {
+      background: rgba(34, 40, 58, 0.9);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+      height: 100%;
+      color: white;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .icon-box i {
+      font-size: 40px;
+      color: #2e7d32;
+      margin-bottom: 15px;
+    }
+
+    .btn-learn-more {
+      color: black;
+      border-radius: 50px;
+      padding: 10px 20px;
+      text-decoration: none;
+    }
+
+    .medicine-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .medicine-name {
+      font-weight: bold;
+      color: #fff;
+      font-size: 1.2rem;
+    }
+
+    .medicine-desc {
+      font-size: 0.9rem;
+    }
+
+    .warning-note {
+      color: #ffcc00;
+      font-weight: bold;
+      border-left: 3px solid #ffcc00;
+      padding-left: 10px;
+    }
+
+    .wellness-card {
+      background: rgba(74, 20, 140, 0.1);
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #4a148c;
+      margin-bottom: 15px;
+    }
+
+    .wellness-card h6 {
+      color: #4a148c;
+      font-weight: bold;
+    }
+
+    .wellness-card ul {
+      padding-left: 20px;
+      margin-bottom: 0;
+    }
+
+    .wellness-card li {
+      margin-bottom: 5px;
+    }
+
+    .wellness-name {
+      font-weight: bold;
+      color: #2e7d32;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Include Main Navbar -->
+  {% include "topnavbar.html" %}
+  <!-- Include Scroll-to-top -->
+  {% include 'chatbot.html' %}
+
+  <!-- Intro Section (no gap) -->
+  <section class="intro">
+    <video autoplay loop muted playsinline class="background-video">
+      <source src="static/bg1.mp4" type="video/mp4">
+    </video>
+
+    <div class="content" data-aos="fade-down">
+      <h1>Wellcome to <span class="highlight">AI-Powered Digital Healthcare Center</span></h1>
+      <!-- <br> -->
+      <!-- Combined Symptom Input/Search + Buttons -->
+      <form class="d-flex align-items-center mx-auto" action="/predict" method="post"
+        style="max-width: 600px; width: 100%;">
+        <div class="input-group w-100 shadow-sm">
+          <!-- Symptom search input -->
+          <input type="search" class="form-control rounded-start-pill border-end-0" id="symptoms" name="symptoms"
+            placeholder="Type or speak your symptoms (itching, aching…)" aria-label="Symptoms input"
+            value="{{ request.form.get('symptoms', '') }}">
+
+          <!-- Search/button -->
+          <button class="btn btn-secondary rounded-end-pill border-start-0" type="submit" id="searchBtn">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+
+        <!-- Mic (speech recognition) -->
+        <button class="btn btn-light ms-2 rounded-circle shadow-sm" type="button" id="startSpeechRecognition"
+          style="width:40px; height:40px;">
+          <i class="bi bi-mic"></i>
+        </button>
+      </form>
+
+      <!-- Predict Button (same style) -->
+      <div class="mt-4">
+        <button class="predict-btn" type="button" id="predictBtn">
+          <i class="bi bi-bar-chart-line me-2"></i> Predict
+        </button>
+      </div>
+
+      {% if message %}
+      <div class="error-message mt-3">{{ message }}</div>
+      {% endif %}
+
+    </div>
+
+    <!-- Speech Recognition Script -->
+    <script>
+
+
+      const micButton = document.getElementById('startSpeechRecognition');
+
+      micButton.addEventListener('click', async function () {
+        if (!('webkitSpeechRecognition' in window)) {
+          alert('Speech recognition is not supported in this browser.');
+          return;
+        }
+
+        try {
+          // Request mic access (only works if user hasn't blocked it)
+          await navigator.mediaDevices.getUserMedia({ audio: true });
+
+          const recognition = new webkitSpeechRecognition();
+          recognition.lang = 'en-US';
+          recognition.interimResults = false;
+          recognition.maxAlternatives = 1;
+
+          recognition.start();
+
+          recognition.onstart = () => {
+            console.log("Listening...");
+          };
+
+          recognition.onresult = function (event) {
+            const transcript = event.results[0][0].transcript;
+            document.getElementById('symptoms').value = transcript.trim();
+            document.getElementById('searchBtn').click();  // optional: auto-submit
+          };
+
+          recognition.onerror = function (event) {
+            alert('Speech recognition error: ' + event.error);
+          };
+
+        } catch (err) {
+          alert(
+            '⚠️ Microphone permission is denied in your browser settings.\n\n' +
+            'To fix this:\n' +
+            '1. Go to browser settings (chrome://settings/content/microphone)\n' +
+            '2. Allow mic access for localhost\n' +
+            '3. Reload this page.'
+          );
+        }
+      });
+      // Predict button submits form
+      document.getElementById('predictBtn').addEventListener('click', () => {
+        document.getElementById('searchBtn').click();
+      });
+    </script>
+  </section>
+
+  <main>
+    <!-- Prediction Results-->
+    <section class="result" aria-labelledby="prediction-result">
+      {% if predicted_disease %}
+
+      <h2 id="result" class="section-title" data-aos="fade-up">Result Of Our AI System</h2>
+      <div class="container">
+        <div class="text-center">
+          <div id="resultContainer" class="result-container">
+            <!-- Buttons to toggle display -->
+            <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#diseaseModal"
+              style="padding:4px;  margin: 12px; font-size:20px;font-weight:bold; width:140px; border-radius:5px; background:#99F741;color:black;">Disease</button>
+            <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#descriptionModal"
+              style="padding:4px; margin: 12px; font-size:20px;font-weight:bold; width:140px; border-radius:5px; background:hsl(288, 94%, 49%) ;color:black;">Description</button>
+            <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#precautionModal"
+              style="padding:4px; margin: 12px; font-size:20px;font-weight:bold; width:140px; border-radius:5px; background:#11deec ;color:black;">Precaution</button>
+            <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#medicationsModal"
+              style="padding:4px; margin: 12px; font-size:20px;font-weight:bold; width:140px;border-radius:5px; background:#a6011d ;color:black;">Medications</button>
+            <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#workoutsModal"
+              style="padding:4px; margin: 12px; font-size:20px;font-weight:bold; width:140px; border-radius:5px; background:#0af2b0b0 ;color:black;">Workouts</button>
+            <button class="toggle-button" data-bs-toggle="modal" data-bs-target="#dietsModal"
+              style="padding:4px; margin: 12px; font-size:20px;font-weight:bold; width:140px; border-radius:5px; background:#d29f08ea;color:black;">Diets</button>
+          </div>
+        </div>
+        <script>
+          window.addEventListener('DOMContentLoaded', function () {
+            const resultBox = document.getElementById('resultContainer');
+            if (resultBox) {
+              // Scroll smoothly to the AI result
+              resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          });
+        </script>
+      </div>
+
+
+      {% endif %}
+
+      <!-- Disease Modal -->
+      <div class="modal fade" id="diseaseModal" tabindex="-1" aria-labelledby="diseaseModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header"> <!-- Set header background color inline -->
+              <h5 class="modal-title" id="diseaseModalLabel">Predicted Disease</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body"> <!-- Set modal body background color inline -->
+              <p>{{ predicted_disease }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Description Modal -->
+      <div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="descriptionModalLabel">Description</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>{{ dis_des }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Precaution Modal -->
+      <div class="modal fade" id="precautionModal" tabindex="-1" aria-labelledby="precautionModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="precautionModalLabel">Precaution</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <ul>
+                {% for i in my_precautions %}
+                <li>{{ i }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <!-- Medications Modal -->
+      <div class="modal fade" id="medicationsModal" tabindex="-1" aria-labelledby="medicationsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="medicationsModalLabel">Medications</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <ul>
+                {% for i in medications %}
+                <li>{{ i }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Workouts Modal -->
+      <div class="modal fade" id="workoutsModal" tabindex="-1" aria-labelledby="workoutsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="workoutsModalLabel">Workouts</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <ul>
+                {% for i in workout %}
+                <li>{{ i }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diets Modal -->
+      <div class="modal fade" id="dietsModal" tabindex="-1" aria-labelledby="dietsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="dietsModalLabel">Diets</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <ul>
+                {% for i in my_diet %}
+                <li>{{ i }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+
+    </section>
+
+    <!-- Services -->
+    <section class="service-section section-wrapper">
+      <div class="service-grid" id="service">
+
+        <a href="#" class="service-card">
+          <i class="fas fa-capsules"></i>
+          <h4>Medicines</h4>
+          <p>2 Hr Delivery</p>
+          <button class="buy-btn tiny">Buy now</button>
+        </a>
+
+        <a href="#" class="service-card">
+          <i class="fas fa-user-md"></i>
+          <h4>Consult Doctor</h4>
+          <p>Top Specialists</p>
+          <button class="buy-btn tiny">Buy now</button>
+        </a>
+
+        <a href="#" class="service-card">
+          <i class="fas fa-vial"></i>
+          <h4>Lab Tests</h4>
+          <p>At Your Home</p>
+          <button class="buy-btn tiny">Buy now</button>
+        </a>
+
+        <a href="#" class="service-card">
+          <i class="fas fa-shield-alt"></i>
+          <h4>Insurance</h4>
+          <p>Full Health Cover</p>
+          <button class="buy-btn tiny">Buy now</button>
+        </a>
+
+        <a href="#" class="service-card">
+          <i class="fas fa-notes-medical"></i>
+          <h4>Reports</h4>
+          <p>Track Easily</p>
+          <button class="buy-btn tiny">Buy now</button>
+        </a>
+
+        <a href="#" class="service-card">
+          <i class="fas fa-heartbeat"></i>
+          <h4>Heart Care</h4>
+          <p>Trusted Doctors</p>
+          <button class="buy-btn tiny">Buy now</button>
+        </a>
+
+        <a href="#" class="service-card">
+          <i class="fas fa-capsules"></i>
+          <h4>Medicines</h4>
+          <p>2 Hr Delivery</p>
+          <button class="buy-btn tiny">Buy now</button>
+        </a>
+
+        <a href="#" class="service-card">
+          <i class="fas fa-user-md"></i>
+          <h4>Consult Doctor</h4>
+          <p>Top Specialists</p>
+          <button class="buy-btn tiny">Buy now</button>
+        </a>
+
+        <a href="#" class="service-card">
+          <i class="fas fa-vial"></i>
+          <h4>Lab Tests</h4>
+          <p>At Your Home</p>
+          <button class="buy-btn tiny">Buy now</button>
+        </a>
+
+        <a href="#" class="service-card">
+          <i class="fas fa-shield-alt"></i>
+          <h4>Insurance</h4>
+          <p>Full Health Cover</p>
+          <button class="buy-btn tiny">Buy now</button>
+        </a>
+
+        <a href="#" class="service-card">
+          <i class="fas fa-notes-medical"></i>
+          <h4>Reports</h4>
+          <p>Track Easily</p>
+          <button class="buy-btn tiny">Buy now</button>
+        </a>
+
+        <a href="#" class="service-card">
+          <i class="fas fa-heartbeat"></i>
+          <h4>Heart Care</h4>
+          <p>Trusted Doctors</p>
+          <button class="buy-btn tiny">Buy now</button>
+        </a>
+
+        <!-- Repeat cards as needed -->
+
+      </div>
+    </section>
+
+
+
+
+
+    <!-- Hero Banners -->
+    <section class="hero-banner-wrapper section-wrapper">
+      <div class="hero-banners" id="bannerSlider">
+        <a href="#"><img src="https://images.apollo247.in/os/prod-media/creative-1749141614868-mamypoko_app.jpg"
+            alt="Banner 1"></a>
+        <a href="#"><img
+            src="https://images.apollo247.in/os/prod-media/creative-1748697198502-Page_Banner_Width_824px_X_Height_412px.jpg"
+            alt="Banner 2"></a>
+        <a href="#"><img
+            src="https://images.apollo247.in/os/prod-media/creative-1748697750946-Medicine_Pharmacy_Page_Banner.jpg"
+            alt="Banner 3"></a>
+        <a href="#"><img src="https://images.apollo247.in/os/prod-media/creative-1749141614868-mamypoko_app.jpg"
+            alt="Banner 4"></a>
+      </div>
+      <div class="banner-dots" id="bannerDots"></div>
+    </section>
+
+
+    <script>
+      const bannerSlider = document.getElementById('bannerSlider');
+      const bannerDots = document.getElementById('bannerDots');
+
+      // Step 1: Duplicate slides for seamless looping
+      let originalSlides = Array.from(bannerSlider.querySelectorAll('a'));
+      const totalOriginalSlides = originalSlides.length;
+
+      originalSlides.forEach(slide => {
+        const clone = slide.cloneNode(true);
+        bannerSlider.appendChild(clone);
+      });
+
+      let allSlides = bannerSlider.querySelectorAll('a');
+      let currentIndex = 0;
+
+      // Step 2: Create dots only for original slides
+      originalSlides.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+          goToSlide(i);
+        });
+        bannerDots.appendChild(dot);
+      });
+
+      const dots = bannerDots.querySelectorAll('.dot');
+
+      function updateDots(idx) {
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx % totalOriginalSlides));
+      }
+
+      function goToSlide(idx, animate = true) {
+        const slideWidth = allSlides[0].offsetWidth;
+        const margin = parseFloat(getComputedStyle(allSlides[0]).marginRight);
+        const offset = (slideWidth + margin) * idx;
+
+        bannerSlider.style.transition = animate ? 'transform 0.5s ease' : 'none';
+        bannerSlider.style.transform = `translateX(-${offset}px)`;
+
+        currentIndex = idx;
+        updateDots(currentIndex);
+      }
+
+      function autoSlide() {
+        currentIndex++;
+        goToSlide(currentIndex);
+
+        // Seamless loop reset
+        if (currentIndex === totalOriginalSlides) {
+          setTimeout(() => {
+            bannerSlider.style.transition = 'none';
+            bannerSlider.style.transform = 'translateX(0px)';
+            currentIndex = 0;
+            updateDots(currentIndex);
+          }, 500); // match transition duration
+        }
+      }
+
+      let bannerInterval = setInterval(autoSlide, 3000);
+
+      bannerSlider.addEventListener('mouseenter', () => clearInterval(bannerInterval));
+      bannerSlider.addEventListener('mouseleave', () => bannerInterval = setInterval(autoSlide, 3000));
+      window.addEventListener('resize', () => goToSlide(currentIndex, false));
+    </script>
+
+
+
+
+    <!-- Health Conditions -->
+    <section class="health-condition-category section-wrapper">
+      <h2>Browse by Health Conditions</h2>
+      <div class="condition-category-grid">
+        <a href="#" class="cond-cat-item">
+          <i class="fa-solid fa-droplet"></i>
+          <span>Diabetes Care</span>
+        </a>
+        <a href="#" class="cond-cat-item">
+          <i class="fa-solid fa-heart-pulse"></i>
+          <span>Cardiac Care</span>
+        </a>
+        <a href="#" class="cond-cat-item">
+          <img
+            srcset="https://images.apollo247.in/pub/media/healtharea/247images/g/r/group-10_1.png?tr=q-80,f-webp,w-100,dpr-2,c-at_max">
+          <span>Stomach Care</span>
+        </a>
+        <a href="#" class="cond-cat-item">
+          <i class="fa-solid fa-hand-holding-medical"></i>
+          <span>Pain Relief</span>
+        </a>
+        <a href="#" class="cond-cat-item">
+          <i class="fas fa-utensils"></i>
+          <span>Liver Care</span>
+        </a>
+        <a href="#" class="cond-cat-item">
+          <i class="fa-solid fa-tooth"></i>
+          <span>Oral Care</span>
+        </a>
+        <a href="#" class="cond-cat-item">
+          <i class="fa-solid fa-lungs"></i>
+          <span>Respiratory</span>
+        </a>
+        <a href="#" class="cond-cat-item">
+          <i class="fa-solid fa-venus-mars"></i>
+          <span>Sexual Health</span>
+        </a>
+        <a href="#" class="cond-cat-item">
+          <i class="fa-solid fa-people-roof"></i>
+          <span>Elderly Care</span>
+        </a>
+        <a href="#" class="cond-cat-item">
+          <i class="fa-solid fa-shield-virus"></i>
+          <span>Cold & Immunity</span>
+        </a>
+      </div>
+    </section>
+
+
+
+
+    <!-- SBI Card Offer -->
+    <section class="sbi-offer section-wrapper">
+      <a href="#"><img
+          src="https://images.apollo247.in/images/category/cc_banner_ts_new.jpg?tr=q-60,f-webp,w-600,dpr-2,c-at_max"
+          alt=""></a>
+    </section>
+
+    <!-- Category Showcase -->
+    <section class="health-condition-category section-wrapper">
+      <h2>Shop by Category</h2>
+      <div class="condition-category-grid">
+        <a href="#" class="cond-cat-item"><i class="fas fa-pills"></i><span>Vitamins</span></a>
+        <a href="#" class="cond-cat-item"><i class="fas fa-syringe"></i><span>Diabetes Care</span></a>
+        <a href="#" class="cond-cat-item"><i class="fas fa-medkit"></i><span>Pain Relief</span></a>
+        <a href="#" class="cond-cat-item"><i class="fas fa-baby"></i><span>Baby Care</span></a>
+        <a href="#" class="cond-cat-item"><i class="fas fa-capsules"></i><span> Supplements</span></a>
+        <a href="#" class="cond-cat-item"><i class="fas fa-spa"></i><span>Skin & Hair</span></a>
+        <a href="#" class="cond-cat-item"><i class="fas fa-medkit"></i><span>Pain Relief</span></a>
+        <a href="#" class="cond-cat-item"><i class="fas fa-baby"></i><span>Baby Care</span></a>
+        <a href="#" class="cond-cat-item"><i class="fas fa-capsules"></i><span> Supplements</span></a>
+        <a href="#" class="cond-cat-item"><i class="fas fa-spa"></i><span>Skin & Hair</span></a>
+      </div>
+    </section>
+
+
+    <!-----======================== Start of Test Section ========================----->
+    <section class="test-section section-wrapper">
+      <h2>Popular Lab Test</h2>
+      <div class="test-cards">
+        <a href="#" class="test-box">
+          <div class="test-icon">🩸</div>
+          <h4>CBC Test</h4>
+          <p class="test-price">60% Off - ₹395</p>
+          <button>Book Now</button>
+        </a>
+        <a href="#" class="test-box">
+          <div class="test-icon">🧪</div>
+          <h4>HbA1c Test</h4>
+          <p class="test-price">Now ₹610</p>
+          <button>Book Now</button>
+        </a>
+        <a href="#" class="test-box">
+          <div class="test-icon">💉</div>
+          <h4>Lipid Profile</h4>
+          <p class="test-price">Flat 50% Off</p>
+          <button>Book Now</button>
+        </a>
+        <a href="#" class="test-box">
+          <div class="test-icon">🩸</div>
+          <h4>CBC Test</h4>
+          <p class="test-price">60% Off - ₹395</p>
+          <button>Book Now</button>
+        </a>
+        <a href="#" class="test-box">
+          <div class="test-icon">🧪</div>
+          <h4>HbA1c Test</h4>
+          <p class="test-price">Now ₹610</p>
+          <button>Book Now</button>
+        </a>
+        <a href="#" class="test-box">
+          <div class="test-icon">💉</div>
+          <h4>Lipid Profile</h4>
+          <p class="test-price">Flat 50% Off</p>
+          <button>Book Now</button>
+        </a>
+        <a href="#" class="test-box">
+          <div class="test-icon">🩸</div>
+          <h4>CBC Test</h4>
+          <p class="test-price">60% Off - ₹395</p>
+          <button>Book Now</button>
+        </a>
+        <a href="#" class="test-box">
+          <div class="test-icon">🧪</div>
+          <h4>HbA1c Test</h4>
+          <p class="test-price">Now ₹610</p>
+          <button>Book Now</button>
+        </a>
+        <a href="#" class="test-box">
+          <div class="test-icon">💉</div>
+          <h4>Lipid Profile</h4>
+          <p class="test-price">Flat 50% Off</p>
+          <button>Book Now</button>
+        </a>
+        <a href="#" class="test-box">
+          <div class="test-icon">🩸</div>
+          <h4>CBC Test</h4>
+          <p class="test-price">60% Off - ₹395</p>
+          <button>Book Now</button>
+        </a>
+
+        <!-- Add more cards as needed -->
+      </div>
+    </section>
+
+    <!-----======================== End of Test Section ========================----->
+
+
+
+
+
+
+    <section class="value-deals section-wrapper">
+      <h2 class="deal-title">Value Deals at ₹100</h2>
+      <div class="deal-grid">
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/a/p/apa0097_1-sep2023.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Charcoal Face Wash" />
+          <p class="deal-name">Apollo Charcoal Face Wash</p>
+          <p class="deal-price">₹99</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/a/p/apa0097_1-sep2023.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Hand Wash" />
+          <p class="deal-name">Aqua Blue Hand Wash</p>
+          <p class="deal-price">₹99</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/a/p/apa0097_1-sep2023.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Charcoal Face Wash" />
+          <p class="deal-name">Apollo Charcoal Face Wash</p>
+          <p class="deal-price">₹99</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/a/p/apa0097_1-sep2023.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Hand Wash" />
+          <p class="deal-name">Aqua Blue Hand Wash</p>
+          <p class="deal-price">₹99</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/a/p/apa0097_1-sep2023.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Charcoal Face Wash" />
+          <p class="deal-name">Apollo Charcoal Face Wash</p>
+          <p class="deal-price">₹99</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/a/p/apa0097_1-sep2023.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Hand Wash" />
+          <p class="deal-name">Aqua Blue Hand Wash</p>
+          <p class="deal-price">₹99</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/a/p/apa0097_1-sep2023.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Charcoal Face Wash" />
+          <p class="deal-name">Apollo Charcoal Face Wash</p>
+          <p class="deal-price">₹99</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/a/p/apa0097_1-sep2023.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Hand Wash" />
+          <p class="deal-name">Aqua Blue Hand Wash</p>
+          <p class="deal-price">₹99</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/a/p/apa0097_1-sep2023.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Charcoal Face Wash" />
+          <p class="deal-name">Apollo Charcoal Face Wash</p>
+          <p class="deal-price">₹99</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/a/p/apa0097_1-sep2023.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Hand Wash" />
+          <p class="deal-name">Aqua Blue Hand Wash</p>
+          <p class="deal-price">₹99</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+
+        <!-- Repeat for remaining products, all wrapped in <a class="deal-card"> -->
+      </div>
+    </section>
+
+
+
+    <section class="value-deals section-wrapper">
+      <h2 class="deal-title">Minimum 50% Off</h2>
+      <div class="deal-grid">
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/g/a/gar0522_1.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Loreal Serum" />
+          <p class="deal-name">Loreal Serum</p>
+          <p class="deal-price">50% OFF</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/g/a/gar0522_1.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Nivea Deo" />
+          <p class="deal-name">Nivea Fresh Deodorant</p>
+          <p class="deal-price">50% OFF</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/g/a/gar0522_1.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Lacto Calamine" />
+          <p class="deal-name">Lacto Calamine SPF</p>
+          <p class="deal-price">50% OFF</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/g/a/gar0522_1.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Dabur Red" />
+          <p class="deal-name">Dabur Red Toothpaste</p>
+          <p class="deal-price">50% OFF</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/g/a/gar0522_1.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Vaseline SPF" />
+          <p class="deal-name">Vaseline Healthy SPF</p>
+          <p class="deal-price">50% OFF</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/g/a/gar0522_1.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Garnier SPF" />
+          <p class="deal-name">Garnier SPF 30+</p>
+          <p class="deal-price">50% OFF</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/g/a/gar0522_1.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Dabur Red" />
+          <p class="deal-name">Dabur Red Toothpaste</p>
+          <p class="deal-price">50% OFF</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/g/a/gar0522_1.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Vaseline SPF" />
+          <p class="deal-name">Vaseline Healthy SPF</p>
+          <p class="deal-price">50% OFF</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/g/a/gar0522_1.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Garnier SPF" />
+          <p class="deal-name">Garnier SPF 30+</p>
+          <p class="deal-price">50% OFF</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+        <a href="#" class="deal-card">
+          <img
+            src="https://images.apollo247.in/pub/media/catalog/product/g/a/gar0522_1.jpg?tr=q-60,f-webp,w-150,dpr-2,c-at_max"
+            alt="Dabur Red" />
+          <p class="deal-name">Dabur Red Toothpaste</p>
+          <p class="deal-price">50% OFF</p>
+          <button class="buy-btn">Buy Now</button>
+        </a>
+      </div>
+    </section>
+
+
+    <section class="sbi-offer section-wrapper">
+      <a href="#"><img
+          src="https://images.apollo247.in/images/category/cc_banner_ts_new.jpg?tr=q-60,f-webp,w-600,dpr-2,c-at_max"
+          alt=""></a>
+    </section>
+
+
+    <!-- How It Works -->
+    <section class="container" aria-labelledby="team">
+      <h2 id="team" class="section-title" data-aos="fade-up">How It Works</h2>
+      <div class="row g-4">
+        <!-- People Cards -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-custom text-center">
+            <i class="bi bi-chat-dots card-icon"></i>
+            <h5>Step 1: Describe Symptoms</h5>
+            <p>Tell us how you feel using text or voice input.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-custom text-center">
+            <i class="bi bi-cpu card-icon"></i>
+            <h5>Step 2: AI Analysis</h5>
+            <p>Our system interprets your input intelligently.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-custom text-center">
+            <i class="bi bi-heart-pulse card-icon"></i>
+            <h5>Step 3: Recommendations</h5>
+            <p>Receive safe, non-prescription suggestions instantly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Values -->
+    <section class="container" aria-labelledby="team">
+      <h2 id="team" class="section-title" data-aos="fade-up">Our Core Values</h2>
+      <div class="row g-4">
+        <!-- People Cards -->
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card-custom text-center">
+            <i class="bi bi-person-hearts card-icon"></i>
+            <h4>Compassion</h4>
+            <p>Empathy and care are at the core of every interaction.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card-custom text-center">
+            <i class="bi bi-cpu card-icon"></i>
+            <h4>Innovation</h4>
+            <p>We believe technology should drive real healthcare impact.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+          <div class="card-custom text-center">
+            <i class="bi bi-gear-fill card-icon"></i>
+            <h4>Integrity</h4>
+            <p>Your privacy, our promise. We build trust through transparency.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Common Symptoms and Remedies -->
+    <section class="container" aria-labelledby="symptoms">
+      <!-- Section Heading -->
+      <h2 id="symptoms" class="section-title text-center mb-4" data-aos="fade-up">
+        Common Health Issues & Treatment Suggestions
+      </h2>
+
+      <!-- Content Block -->
+      <div class="container py-3">
+        <div class="row align-items-center g-3 flex-md-row flex-column-reverse">
+
+          <!-- Text Description -->
+          <div class="col-md-7">
+            <div class="p-4 shadow rounded-4" style="background:#05b2c2">
+              <h5 class="fw-bold text-dark mb-3">Instant & Reliable Medicine Recommendations</h5>
+              <p class="text-dark mb-2">
+                Our AI-powered Medicine Recommendation System is designed to provide you with quick and reliable
+                suggestions based on your symptoms.
+              </p>
+              <p class="text-dark mb-0">
+                It ensures that you get safe and effective recommendations instantly, making self-care easier and more
+                accessible anytime, anywhere.
+              </p>
+            </div>
+          </div>
+
+          <!-- Visual Image -->
+          <div class="col-md-5 text-center">
+            <img src="{{ url_for('static', filename='b5.avif') }}" alt="Health Visual"
+              class="img-fluid rounded-3 shadow-sm" style="max-height: 220px; object-fit: cover;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Symptoms & Medicines Section -->
+      <div style="background-color: #d4edda;" class="shadow-sm p-4 rounded-4 mt-5">
+        <h3 class="fw-bold text-center mb-4" style="color: rgb(247, 27, 148);">Common Symptoms & Medicine
+          Recommendations</h3>
+
+        <!-- Symptom List -->
+        <ul class="list-unstyled fs-6 px-3 mb-4">
+          <li><strong>Fever:</strong> Paracetamol, Ibuprofen, stay hydrated</li>
+          <li><strong>Headache:</strong> Aspirin, Ibuprofen, rest in a dark room</li>
+          <li><strong>Cold:</strong> Antihistamines, decongestants, warm fluids</li>
+          <li><strong>Cough:</strong> Cough syrup, honey tea, hydration</li>
+          <li><strong>Stomach Pain:</strong> Antacids, BRAT diet (Bananas, Rice, Applesauce, Toast)</li>
+        </ul>
+
+        <!-- Medicine Image Gallery -->
+        <div class="d-flex justify-content-center gap-4 flex-wrap">
+          <img src="{{ url_for('static', filename='medicine1.jpg') }}" alt="Medicine 1" class="rounded shadow-sm"
+            style="width: 140px; height: auto;">
+          <img src="{{ url_for('static', filename='medicine2.jpg') }}" alt="Medicine 2" class="rounded shadow-sm"
+            style="width: 140px; height: auto;">
+          <img src="{{ url_for('static', filename='medicine3.jpg') }}" alt="Medicine 3" class="rounded shadow-sm"
+            style="width: 140px; height: auto;">
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="page1-container">
+        <section class="hero-section text-center text-lg-start">
+          <div class="container hero-content">
+            <h1 class="fw-bold">AI-Powered Medicine Recommendation</h1>
+            <p class="lead">Get personalized medicine suggestions based on your symptoms and medical history</p>
+
+            <div class="row align-items-center mt-5">
+
+              <!-- Left Info Column -->
+              <div class="col-lg-4">
+                <div class="bg-primary text-white p-4 rounded">
+                  <h3 class="fw-bold">Your Health, Backed by AI</h3>
+                  <p>Our intelligent system reviews your symptoms and suggests suitable non-prescription medications
+                    tailored to your needs.</p>
+                  <p>In case of complex or critical symptoms, we strongly recommend consulting a certified medical
+                    professional before taking any medicine.</p>
+                  <div class="warning-note mt-3">
+                    ⚠️ Please note: This tool is designed to assist—not replace—professional medical advice.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Features Column -->
+              <div class="col-lg-8">
+                <div class="row">
+                  <!-- Feature 1 -->
+                  <div class="col-md-4">
+                    <div class="feature-box text-center icon-box">
+                      <i class="bi bi-heart-pulse"></i>
+                      <h5 class="fw-bold">Head & Respiratory Wellness</h5>
+                      <div class="wellness-card">
+                        <div class="wellness-name">Headache Prevention</div>
+                        <ul>
+                          <li>Daily yoga (especially forward bends)</li>
+                          <li>Proper hydration (2-3L water daily)</li>
+                          <li>Neck and shoulder stretches every 2 hours</li>
+                          <li>Blue light reduction for screen time</li>
+                        </ul>
+                      </div>
+                      <div class="wellness-card">
+                        <div class="wellness-name">Allergy Management</div>
+                        <ul>
+                          <li>Local honey consumption (1 tsp daily)</li>
+                          <li>Nasal saline rinses</li>
+                          <li>Morning forest walks for clean air</li>
+                          <li>HEPA air filters in living spaces</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Feature 2 -->
+                  <div class="col-md-4">
+                    <div class="feature-box text-center icon-box">
+                      <i class="bi bi-brightness-high"></i>
+                      <h5 class="fw-bold">Immunity Boosters</h5>
+                      <div class="wellness-card">
+                        <div class="wellness-name">Fever Prevention</div>
+                        <ul>
+                          <li>30-minute brisk walking</li>
+                          <li>Vitamin D from sunlight (15 min daily)</li>
+                          <li>Elderberry syrup supplementation</li>
+                          <li>Warm lemon water each morning</li>
+                        </ul>
+                      </div>
+                      <div class="wellness-card">
+                        <div class="wellness-name">Respiratory Health</div>
+                        <ul>
+                          <li>Pranayama breathing exercises</li>
+                          <li>Eucalyptus steam inhalation</li>
+                          <li>High-altitude hiking for lung capacity</li>
+                          <li>Humidifier use in dry climates</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Feature 3 -->
+                  <div class="col-md-4">
+                    <div class="feature-box text-center icon-box">
+                      <!-- <i class="bi bi-person-walking"></i> -->
+                      <i class="bi bi-bicycle"></i>
+                      <h5 class="fw-bold">Movement & Digestion</h5>
+                      <div class="wellness-card">
+                        <div class="wellness-name">Joint Mobility</div>
+                        <ul>
+                          <li>Swimming 3x weekly</li>
+                          <li>Tai chi or qigong practice</li>
+                          <li>Yoga for flexibility</li>
+                          <li>Cycling on smooth terrain</li>
+                        </ul>
+                      </div>
+                      <div class="wellness-card">
+                        <div class="wellness-name">Healthy Digestion</div>
+                        <ul>
+                          <li>Post-meal nature walks</li>
+                          <li>Stress-reducing yoga poses</li>
+                          <li>Fermented foods in diet</li>
+                          <li>Mindful eating practices</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Scripts -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </section>
+
+
+
+    <!-- About Us & Key Principle -->
+    <section class="container" aria-labelledby="vision-how">
+      <h2 id="vision-how" class="section-title" data-aos="fade-up">About Us &amp; Key Principle</h2>
+      <div class="row g-4">
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-custom">
+            <i class="bi bi-people card-icon"></i>
+            <h4>Who Are We</h4>
+            <p>We are a passionate team of healthcare professionals, AI engineers, data scientists, and Software
+              Engineers committed to revolutionizing healthcare through AI-powered, personalized digital solutions that
+              make medical support smarter, faster, and more accessible for everyone.</p>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-custom">
+            <i class="bi bi-graph-up card-icon"></i>
+            <h4>About Our Project</h4>
+            <p>Our AI-powered health center combines cutting-edge technology with compassionate care to transform
+              healthcare. We aim to create a smarter, more efficient, and accessible medical experience for
+              everyone—bridging innovation and empathy to deliver truly exceptional, personalized health support.</p>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-custom">
+            <i class="bi bi-gear card-icon"></i>
+            <h4>How It Works</h4>
+            <p>Enter your symptoms, and our AI engine instantly analyzes them to identify possible diseases based on
+              your given symptoms, recommend
+              medications, suggest diets and workouts, and provide clear insights-empowering you with personalized,
+              data-driven health guidance in just seconds.</p>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-custom">
+            <i class="bi bi-cpu card-icon"></i>
+            <h4>Our Technology</h4>
+            <p>We integrate advanced AI, large language models, computer vision, and natural language processing within
+              a secure cloud infrastructure. Continuously updated with trusted sources, our technology delivers precise,
+              real-time healthcare insights tailored to each user's needs and conditions.</p>
+
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-custom">
+            <i class="bi bi-clock-history card-icon"></i>
+            <h4>Our Journey</h4>
+            <p>Launched in 2024 as a simple research project, Then we collaborated with AI experts and doctors and other
+              researcher's to build a digital
+              healthcare platform. Today, it serves over 50,000 users globally, with partnerships across hospitals,
+              universities, and medical institutions.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-custom">
+            <i class="bi bi-check-circle card-icon"></i>
+            <h4>Verified Health Data & Privacy</h4>
+            <p>Our platform relies on trusted sources like WHO, CDC, and peer-reviewed journals to ensure accuracy. We
+              prioritize data privacy and security, giving you science-backed insights while protecting your personal
+              health information with the highest standards of care and confidentiality.</p>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Team -->
+    <section class="container" aria-labelledby="team">
+      <h2 id="team" class="section-title" data-aos="fade-up">Meet the Team</h2>
+      <div class="row g-4">
+        <!-- People Cards -->
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-custom text-center">
+            <i class="bi bi-cpu card-icon"></i>
+            <h4>Mr. Netai Jana</h4>
+            <p>Lead AI Engineer</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-custom text-center">
+            <i class="bi bi-gear-fill card-icon"></i>
+            <h4>Mr. Netai Jana</h4>
+            <p>Product Manager</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-custom text-center">
+            <i class="bi bi-heart-pulse card-icon"></i>
+            <h4>Dr. Sudip Jana</h4>
+            <p>Chief Medical Officer</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- FAQs -->
+    <section class="container">
+      <h2 class="section-title" data-aos="fade-up">Frequently Asked Questions</h2>
+      <div class="faq-card" data-aos="fade-up">
+        <h5>Is the platform a replacement for doctors?</h5>
+        <p>No. It's a support tool to help you understand symptoms better and seek the right care faster.</p>
+      </div>
+      <div class="faq-card" data-aos="fade-up">
+        <h5>How accurate is the AI diagnosis?</h5>
+        <p>We constantly validate our models with real clinical data, but we always recommend medical confirmation.</p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" data-aos="fade-up">
+      <h2>Ready to Elevate Your Health Journey?</h2>
+      <p>Get personalized, AI-driven insights and compassionate support today.</p>
+      <a href="/contact">Contact Us</a>
+    </section>
+  </main>
+
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+  </script>
+</body>
+
+</html>

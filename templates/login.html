@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Secure login, signup, and password recovery for Digital Health Center. Manage your digital health profile easily." />
+  <title>Authentication - Digital Health Center</title>
+
+  <!-- Bootstrap CSS & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url("static/bg2.avif") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .auth-container {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(16px);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+      color: black;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: fadeIn 1s ease-out;
+      margin-top: 60px;
+    }
+
+    h2.auth-title {
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #ff0099, #423601fb, #00eaff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .form-label {
+      font-weight: 600;
+    }
+
+    .form-control {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #790c0c;
+    }
+
+    .form-control::placeholder {
+      color: rgba(255, 255, 255, .8);
+    }
+
+    .form-control:focus {
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 10px rgba(0, 255, 234, 0.3);
+      border-color: #00eaff;
+      color: #17a7a7;
+    }
+
+    .btn-auth {
+      background: linear-gradient(135deg, #ff0099, #022a2d, #00eaff);
+      border: none;
+      padding: 5px 60px;
+      font-weight: 600;
+      border-radius: 50px;
+      color: white;
+      transition: all 0.3s ease;
+      margin: 20px auto 0;
+      display: block;
+      width: fit-content;
+    }
+
+    .btn-auth:hover {
+      box-shadow: 0 0 15px rgba(0, 255, 234, 0.4), 0 0 25px rgba(255, 0, 153, 0.4);
+      transform: scale(1.02);
+    }
+
+    .form-text a {
+      color: #a600ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .form-text a:hover {
+      color: #00eaff;
+    }
+
+    .auth-tab {
+      display: none;
+    }
+
+    .auth-tab.active {
+      display: block;
+    }
+
+    .auth-links {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="auth-container" role="main">
+
+    <!-- Login Form -->
+    <section id="login-tab" class="auth-tab active">
+      <h2 class="auth-title">Sign In</h2>
+      <form method="POST" action="/login">
+        <div class="mb-3">
+          <label for="login-email" class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="login-email" name="email" placeholder="example@gmail.com" autocomplete="email" required>
+        </div>
+        <div class="mb-3">
+          <label for="login-password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="login-password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+        </div>
+        <div class="mb-3 text-end form-text">
+          <a href="#" onclick="switchTab('forgot-tab')">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn btn-auth">Login</button>
+        <div class="auth-links form-text">
+          Don't have an account? <a href="#" onclick="switchTab('signup-tab')">Sign up</a>
+        </div>
+      </form>
+    </section>
+
+    <!-- Sign Up Form -->
+    <section id="signup-tab" class="auth-tab">
+      <h2 class="auth-title">Create Account</h2>
+      <form method="POST" action="/signup">
+        <div class="mb-3">
+          <label for="signup-name" class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="signup-name" name="name" placeholder="John Doe" autocomplete="name" required>
+        </div>
+        <div class="mb-3">
+          <label for="signup-email" class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="signup-email" name="email" placeholder="example@domain.com" autocomplete="email" required>
+        </div>
+         <div class="mb-3">
+          <label for="signup-mobile" class="form-label">Mobile No</label>
+          <input type="mobile" class="form-control" id="signup-mobile" name="mobile" placeholder="9712345678" autocomplete="email" required>
+        </div>
+        <div class="mb-3">
+          <label for="signup-password" class="form-label">Create Password</label>
+          <input type="password" class="form-control" id="signup-password" name="password" placeholder="Enter your password" autocomplete="new-password" required>
+        </div>
+        <div class="mb-3">
+          <label for="signup-confirm" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control" id="signup-confirm" name="confirm_password" placeholder="Re-enter password" autocomplete="new-password" required>
+        </div>
+        <button type="submit" class="btn btn-auth">Sign Up</button>
+        <div class="auth-links form-text">
+          Already have an account? <a href="#" onclick="switchTab('login-tab')">Login here</a>
+        </div>
+      </form>
+    </section>
+
+    <!-- Forgot Password Form -->
+    <section id="forgot-tab" class="auth-tab">
+      <h2 class="auth-title">Forgot Password</h2>
+      <form method="POST" action="/forgot-password">
+        <div class="mb-3">
+          <label for="forgot-email" class="form-label">Enter your registered email</label>
+          <input type="email" class="form-control" id="forgot-email" name="email" placeholder="example@domain.com" autocomplete="email" required>
+        </div>
+        <button type="submit" class="btn btn-auth">Send Reset Link</button>
+        <div class="auth-links form-text">
+          <a href="#" onclick="switchTab('login-tab')"><i class="bi bi-arrow-left-circle"></i> Back to Login</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    function switchTab(tabId) {
+      const tabs = document.querySelectorAll(".auth-tab");
+      tabs.forEach(tab => tab.classList.remove("active"));
+      document.getElementById(tabId).classList.add("active");
+    }
+  </script>
+</body>
+
+</html>
